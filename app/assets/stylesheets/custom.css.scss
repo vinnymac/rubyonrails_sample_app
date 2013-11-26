@@ -80,6 +80,34 @@ p {
   }
 }
 
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: $grayLight;
+  a {
+    color: #555;
+    &:hover {
+      color: #222;
+    }
+  }
+
+  small {
+    float: left;
+  }
+
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
 /* miscellaneous */
 
 .debug_dump {
@@ -120,30 +148,28 @@ aside {
   margin-right: 10px;
 }
 
-/* footer */
+/* forms */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: $grayLight;
-  a {
-    color: #555;
-    &:hover {
-      color: #222;
-    }
-  }
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
 
-  small {
-    float: left;
-  }
+input {
+  height: auto !important;
+}
 
+#error_explanation {
+  color: #f00;
   ul {
-    float: right;
     list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
+    margin: 0 0 18px 0;
   }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
 }
