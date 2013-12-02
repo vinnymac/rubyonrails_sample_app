@@ -28,13 +28,7 @@ describe "User Pages" do
       describe "after submission" do
 
         describe "password is too short" do
-          before do
-            fill_in "Name",         with: "name"
-            fill_in "Email",        with: "user@example.com"
-            fill_in "Password",     with: "foo"
-            fill_in "Confirmation", with: "foo"
-            click_button submit
-          end
+          before { invalid_short_password }
           it { should have_content('is too short') }
 
           it { should have_title('Sign up') }
@@ -42,13 +36,7 @@ describe "User Pages" do
         end
 
         describe "email is invalid" do
-          before do
-            fill_in "Name",         with: "FooBar"
-            fill_in "Email",        with: "example.com"
-            fill_in "Password",     with: "FooBar"
-            fill_in "Confirmation", with: "FooBar"
-            click_button submit
-          end
+          before { invalid_email }
           it { should have_content('Email is invalid') }
 
           it { should have_title('Sign up') }
@@ -56,13 +44,7 @@ describe "User Pages" do
         end
 
         describe "password can't be blank" do
-          before do
-            fill_in "Name",         with: "FooBar"
-            fill_in "Email",        with: "email@example.com"
-            fill_in "Password",     with: ""
-            fill_in "Confirmation", with: ""
-            click_button submit
-          end
+          before { blank_password }
           it { should have_content("Password can't be blank") }
 
           it { should have_title('Sign up') }
@@ -70,13 +52,7 @@ describe "User Pages" do
         end
 
         describe "name is too long" do
-          before do
-            fill_in "Name",         with: "foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoo"
-            fill_in "Email",        with: "email@example.com"
-            fill_in "Password",     with: "FooBar"
-            fill_in "Confirmation", with: "FooBar"
-            click_button submit
-          end
+          before { long_name }
           it { should have_content('Name is too long (maximum is 50 characters)') }
 
           it { should have_title('Sign up') }
@@ -84,13 +60,7 @@ describe "User Pages" do
         end
 
         describe "password confirmation doesn't match" do
-          before do
-            fill_in "Name",         with: "foobar"
-            fill_in "Email",        with: "email@example.com"
-            fill_in "Password",     with: "FooBar"
-            fill_in "Confirmation", with: "BarFoo"
-            click_button submit
-          end
+          before { invalid_password_confirmation }
           it { should have_content("Password confirmation doesn't match Password") }
 
           it { should have_title('Sign up') }
@@ -101,13 +71,8 @@ describe "User Pages" do
     end
 
     describe "with valid information" do
-      before do
-        fill_in "Name",         with: "Example User"
-        fill_in "Email",        with: "user@example.com"
-        fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
-      end
-      
+      before { valid_signup }
+
       it "should create a user" do
         expect { click_button submit }.to change( User, :count ).by(1)
       end
