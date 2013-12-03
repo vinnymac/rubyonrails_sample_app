@@ -7,4 +7,9 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+
+  #def gravatar_change(user, options = { size: 50 } )
+  #  gravatar_for(user, options)
+  #  link_to("change", "http://gravatar.com/emails", target: "_blank"))
+  #end
 end
