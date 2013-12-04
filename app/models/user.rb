@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
 
   before_create :create_remember_token
 
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+    # Same as writing: microposts
+  end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
