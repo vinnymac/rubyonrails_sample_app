@@ -27,6 +27,21 @@ describe "Static pages" do
         visit root_path
       end
 
+      describe "for multiple microposts" do
+        before do 
+          29.times { FactoryGirl.create(:micropost, user: user, content: "Moar micro") }
+          visit root_path
+        end
+
+        it "should have 31 microposts" do
+          expect(page).to have_content('31 microposts')
+        end
+
+        it "should paginate after 31 microposts" do
+          expect(page).to have_selector('div.pagination')
+        end
+      end
+
       it "should render the user's feed" do
         user.feed.each do |item|
           expect(page).to have_selector("li##{item.id}", text: item.content)
