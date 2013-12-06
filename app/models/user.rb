@@ -25,9 +25,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
 
   def feed
-    # This is preliminary. See "Following users" for the full implementation.
-    Micropost.where("user_id = ?", id)
-    # Same as writing: microposts
+    Micropost.from_users_followed_by(self)
   end
 
   def following?(other_user)

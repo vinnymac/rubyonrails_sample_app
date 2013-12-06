@@ -23,5 +23,5 @@ updateCountdown = ->
 
 $ ->
   updateCountdown()
-  $("#micropost_content").on 'keyup change', updateCountdown
+  $("#micropost_content").on 'keyup keydown change', updateCountdown
   # $("#micropost_content").on 'keyup change', updateColor
